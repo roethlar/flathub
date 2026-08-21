@@ -13,9 +13,9 @@ modules:
   - name: songr
     buildsystem: simple
     build-commands:
-      - chmod +x Songr-1.1.3.AppImage
-      - ./Songr-1.1.3.AppImage --appimage-extract
-      - rm -f Songr-1.1.3.AppImage
+      - chmod +x Songr-1.1.4.AppImage
+      - ./Songr-1.1.4.AppImage --appimage-extract
+      - rm -f Songr-1.1.4.AppImage
       - rm -rf /app/songr.AppDir
       - mv squashfs-root /app/songr.AppDir
       - install -Dm755 songr.sh /app/bin/songr
@@ -24,9 +24,14 @@ modules:
       - install -Dm644 io.github.roethlar.songr.png /app/share/icons/hicolor/512x512/apps/io.github.roethlar.songr.png
     sources:
       - type: file
-        url: https://github.com/roethlar/songr/releases/download/v1.1.3/Songr-1.1.3.AppImage
-        sha256: '06cbe9c07203f1351be5338637be648d6d9193f28319ed257edbf9499aa555e8'
-        dest-filename: Songr-1.1.3.AppImage
+        url: https://github.com/roethlar/songr/releases/download/v1.1.4/Songr-1.1.4.AppImage
+        sha256: '1b8ee9e6bb02310f372479ab2260da3a6fbc7ffc9d890aae052e050983c0402f'
+        dest-filename: Songr-1.1.4.AppImage
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/roethlar/songr/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name == "Songr-" + $version + ".AppImage") | .browser_download_url
       - type: file
         path: songr.sh
       - type: file
